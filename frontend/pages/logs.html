@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Logs - Waste Detection System</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Waste Detection</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">📹 Live</a></li>
+                <li><a href="logs.html" class="nav-link active">📋 Logs</a></li>
+                <li><a href="billing.html" class="nav-link">💰 Billing</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Logs Page -->
+            <div id="logs-page" class="page active">
+                <div class="page-header">
+                    <h1>Detection History</h1>
+                    <button id="refresh-logs" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div class="logs-container">
+                    <div id="logs-list" class="logs-list">
+                        <!-- Logs will be populated here -->
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <h3>Loading Detection History...</h3>
+                            <p>Please wait while we fetch the latest logs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/logs.js"></script>
+    <script>
+        // Initialize logs page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLogs();
+        });
+    </script>
+</body>
+</html>

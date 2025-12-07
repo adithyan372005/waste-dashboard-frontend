@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Detection Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Waste Detection</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#live" class="nav-link active" data-page="live">📹 Live</a></li>
+                <li><a href="#logs" class="nav-link" data-page="logs">📋 Logs</a></li>
+                <li><a href="#billing" class="nav-link" data-page="billing">💰 Billing</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Live View Page -->
+            <div id="live-page" class="page active">
+                <div class="page-header">
+                    <h1>Live Detection</h1>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span>Live</span>
+                    </div>
+                </div>
+                <div class="live-container">
+                    <div class="image-preview">
+                        <img id="live-image" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y1ZjVmNSIgc3Ryb2tlPSIjZGRkIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8dGV4dCB4PSIyNTAiIHk9IjIwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSIjNjY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+V2FpdGluZyBmb3IgbGl2ZSBmZWVkLi4uPC90ZXh0Pgo8L3N2Zz4K" alt="Live Feed">
+                    </div>
+                    <div class="detection-info">
+                        <div class="info-card">
+                            <h3>Detection Details</h3>
+                            <div class="info-row">
+                                <span class="label">Waste Class:</span>
+                                <span id="waste-class" class="value">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Category:</span>
+                                <span id="wet-dry" class="value">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Confidence:</span>
+                                <span id="confidence" class="value">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Mixed Waste:</span>
+                                <span id="is-mixed" class="value">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Violation:</span>
+                                <span id="is-violation" class="value">-</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">Last Updated:</span>
+                                <span id="timestamp" class="value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Page -->
+            <div id="logs-page" class="page">
+                <div class="page-header">
+                    <h1>Detection History</h1>
+                    <button id="refresh-logs" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div class="logs-container">
+                    <div id="logs-list" class="logs-list">
+                        <!-- Logs will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billing Page -->
+            <div id="billing-page" class="page">
+                <div class="page-header">
+                    <h1>Billing Summary</h1>
+                    <button id="refresh-billing" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div class="billing-container">
+                    <div class="billing-grid">
+                        <div class="billing-card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <h3>Total Items</h3>
+                                <span id="total-items" class="card-value">-</span>
+                            </div>
+                        </div>
+                        <div class="billing-card success">
+                            <div class="card-icon">✅</div>
+                            <div class="card-content">
+                                <h3>Correct</h3>
+                                <span id="correct-items" class="card-value">-</span>
+                            </div>
+                        </div>
+                        <div class="billing-card error">
+                            <div class="card-icon">❌</div>
+                            <div class="card-content">
+                                <h3>Incorrect</h3>
+                                <span id="incorrect-items" class="card-value">-</span>
+                            </div>
+                        </div>
+                        <div class="billing-card warning">
+                            <div class="card-icon">⚠️</div>
+                            <div class="card-content">
+                                <h3>Penalty</h3>
+                                <span id="penalty-amount" class="card-value">-</span>
+                            </div>
+                        </div>
+                        <div class="billing-card primary">
+                            <div class="card-icon">💵</div>
+                            <div class="card-content">
+                                <h3>Final Bill</h3>
+                                <span id="final-bill" class="card-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/live.js"></script>
+    <script src="js/logs.js"></script>
+    <script src="js/billing.js"></script>
+    <script>
+        // Navigation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and pages
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    pages.forEach(p => p.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding page
+                    const pageId = this.getAttribute('data-page') + '-page';
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+
+            // Initialize pages
+            initializeLive();
+            initializeLogs();
+            initializeBilling();
+        });
+    </script>
+</body>
+</html>

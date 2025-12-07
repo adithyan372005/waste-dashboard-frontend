@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Summary - Waste Detection System</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>Waste Detection</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">📹 Live</a></li>
+                <li><a href="logs.html" class="nav-link">📋 Logs</a></li>
+                <li><a href="billing.html" class="nav-link active">💰 Billing</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Billing Page -->
+            <div id="billing-page" class="page active">
+                <div class="page-header">
+                    <h1>Billing Summary</h1>
+                    <button id="refresh-billing" class="refresh-btn">🔄 Refresh</button>
+                </div>
+                <div class="billing-container">
+                    <div class="billing-grid">
+                        <div class="billing-card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <h3>Total Items</h3>
+                                <span id="total-items" class="card-value">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="billing-card success">
+                            <div class="card-icon">✅</div>
+                            <div class="card-content">
+                                <h3>Correct</h3>
+                                <span id="correct-items" class="card-value">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="billing-card error">
+                            <div class="card-icon">❌</div>
+                            <div class="card-content">
+                                <h3>Incorrect</h3>
+                                <span id="incorrect-items" class="card-value">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="billing-card warning">
+                            <div class="card-icon">⚠️</div>
+                            <div class="card-content">
+                                <h3>Penalty</h3>
+                                <span id="penalty-amount" class="card-value">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="billing-card primary">
+                            <div class="card-icon">💵</div>
+                            <div class="card-content">
+                                <h3>Final Bill</h3>
+                                <span id="final-bill" class="card-value">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/billing.js"></script>
+    <script>
+        // Initialize billing page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBilling();
+        });
+    </script>
+</body>
+</html>
